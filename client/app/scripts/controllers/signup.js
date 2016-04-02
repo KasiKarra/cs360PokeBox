@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('clientApp')
-	.controller('SignupCtrl', function () {
+	.controller('SignupCtrl', function ($http) {
 
 		var user, signup;
 
@@ -32,19 +32,19 @@ angular.module('clientApp')
 			// Just so we can confirm that the bindings are working
 			console.log(user);
 
-			/*
 			// Make the request to the server
 			var request = $http.post('/signup', user);
 
 			// we'll come back to here and fill in more when ready
 			request.success(function (data) {
 				// to be filled in on success
+				console.log(data);
 			});
 
 			request.error(function (data) {
 				// to be filled in on error
+				console.log(data);
 			});
-			*/
 		};
 		
 	});
