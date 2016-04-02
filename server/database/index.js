@@ -2,7 +2,7 @@
  * Our Database Interface
  */
 var mongoose = require('mongoose');
-var UserModel = require('./schemas/users');
+var UserModel = require('./schemas/user');
 
 // Connections
 var developmentDb = 'mongodb://localhost/test';
