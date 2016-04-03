@@ -8,6 +8,7 @@ module.exports = function (app, passport) {
 
     app.use('/signup', require('./routes/signup'));
     app.use('/logout', require('./routes/logout'));
+    app.use('/login',  require('./routes/login'));
 
     // Routes that require the user to be logged in
     app.use('/profile', isLoggedIn, require('./routes/profile'));
