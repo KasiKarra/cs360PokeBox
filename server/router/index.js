@@ -23,5 +23,5 @@ function isLoggedIn(req, res, next) {
     // Log the unauthorized request
     console.log('Unauthorized request to ' + color.red(req.originalUrl) + ' from ' + color.red(req.ip));
     // If they aren't redirect them to the home page
-    res.redirect('/');
+    res.status(401).json({error: 'Unauthorized'});
 }
