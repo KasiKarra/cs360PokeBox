@@ -11,6 +11,7 @@ module.exports = function (app, passport) {
     app.use('/login',  require('./routes/login'));
     app.use('/auth',   require('./routes/auth'));
     app.use('/connect',require('./routes/connect'));
+    app.use('/unlink',require('./routes/unlink'));
 
     // Routes that require the user to be logged in
     app.use('/profile', isLoggedIn, require('./routes/profile'));
