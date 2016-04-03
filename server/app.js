@@ -26,7 +26,7 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 /**
  * Routes
  */
-var router = require('./router')(app);
+var router = require('./router')(app, passport);
 
 /**
  * Development Settings
