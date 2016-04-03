@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('clientApp')
-	.controller('SignupCtrl', function ($http) {
+	.controller('SignupCtrl', function ($http, $location) {
 
 		var user, signup;
 
@@ -40,6 +40,7 @@ angular.module('clientApp')
 				console.log(data);
 				signup.error = false;
 				signup.success = data.message;
+				$location.path('/profile');
 			});
 
 			request.error(function (data) {
