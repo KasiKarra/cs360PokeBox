@@ -4,6 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var flash = require('connect-flash');
+var passport = require('passport');
+var session = require('express-session');
 
 var app = express();
 
@@ -13,10 +16,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+require('./config/passport')(passport);
+app.use(session({ secret: 'gottacatchemall', resave: false, saveUninitialized: false })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
 /**
  * Routes
  */
-var router = require('./router')(app);
+var router = require('./router')(app, passport);
 
 /**
  * Development Settings
@@ -31,7 +40,7 @@ if (app.get('env') === 'development') {
     // Error Handling
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        res.render('error', {
+        res.json({
             message: err.message,
             error: err
         });
@@ -50,7 +59,7 @@ if (app.get('env') === 'production') {
     // no stacktraces leaked to user
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        res.render('error', {
+        res.json({
             message: err.message,
             error: {}
         });

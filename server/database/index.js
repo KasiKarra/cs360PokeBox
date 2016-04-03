@@ -2,7 +2,7 @@
  * Our Database Interface
  */
 var mongoose = require('mongoose');
-var UserModel = require('./schemas/users');
+var UserModel = require('./schemas/user');
 
 // Connections
 var developmentDb = 'mongodb://localhost/test';
@@ -26,7 +26,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 // Open the connection
 db.once('open', function callback () {
-  console.log('Databsae Connection Successfully Opened at ' + database);
+  console.log('Database Connection Successfully Opened at ' + database);
 });
 
 exports.users = UserModel;

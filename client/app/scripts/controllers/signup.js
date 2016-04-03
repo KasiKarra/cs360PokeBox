@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('clientApp')
-	.controller('SignupCtrl', function ($http) {
+	.controller('SignupCtrl', function ($http, $location) {
 
 		var user, signup;
 
@@ -13,21 +13,20 @@ angular.module('clientApp')
 			
 			// Make sure all fields are filled out...
 			if (
-				!user.firstname ||
-				!user.lastname ||
 				!user.email ||
 				!user.password1 ||
 				!user.password2
 			) {
-				window.alert('Please fill out all form fields.');
+				signup.error = 'Please fill out all form fields.';
 				return false;
 			}
 
 			// make sure the passwords match match
 			if (user.password1 !== user.password2) {
-				window.alert('Your passwords must match.');
+				signup.error = 'Your passwords must match.';
 				return false;
 			}
+			user.password = user.password1;
 
 			// Just so we can confirm that the bindings are working
 			console.log(user);
@@ -35,15 +34,21 @@ angular.module('clientApp')
 			// Make the request to the server
 			var request = $http.post('/signup', user);
 
-			// we'll come back to here and fill in more when ready
 			request.success(function (data) {
 				// to be filled in on success
 				console.log(data);
+				signup.error = false;
+				signup.success = data.message;
+				$location.path('/profile');
 			});
 
 			request.error(function (data) {
 				// to be filled in on error
 				console.log(data);
+				if(Array.isArray(data.message)) {
+					data.message = data.message.join();
+				}
+				signup.error = data.message;
 			});
 		};
 		
