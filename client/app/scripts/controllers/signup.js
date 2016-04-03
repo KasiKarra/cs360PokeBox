@@ -19,13 +19,13 @@ angular.module('clientApp')
 				!user.password1 ||
 				!user.password2
 			) {
-				window.alert('Please fill out all form fields.');
+				signup.error = 'Please fill out all form fields.';
 				return false;
 			}
 
 			// make sure the passwords match match
 			if (user.password1 !== user.password2) {
-				window.alert('Your passwords must match.');
+				signup.error = 'Your passwords must match.';
 				return false;
 			}
 
@@ -39,11 +39,13 @@ angular.module('clientApp')
 			request.success(function (data) {
 				// to be filled in on success
 				console.log(data);
+				signup.success = data.message;
 			});
 
 			request.error(function (data) {
 				// to be filled in on error
 				console.log(data);
+				signup.error = data.message;
 			});
 		};
 		

@@ -55,6 +55,12 @@
 			</div>
 		</div>
 
+		<!-- Error messages -->
+		<div class="alert alert-danger" ng-show="signup.error" class="ng-hide">{{signup.error}}</div>
+
+		<!-- Success messages -->
+		<div class="alert alert-success" ng-show="signup.success" class="ng-hide">{{signup.success}}</div>
+
 		<!-- Button -->
 		<div class="form-group">
 			<label class="col-md-4 control-label" for="signup"></label>
