@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 
-// route for facebook authentication and login
+// Routes for authentication and login
 router.get('/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
 router.get('/facebook/callback',
@@ -20,6 +20,14 @@ router.get('/google/callback',
 passport.authenticate('google', {
         successRedirect : '/#/profile',
         failureRedirect : '/'
+}));
+
+router.get('/twitter', passport.authenticate('twitter'));
+
+router.get('/twitter/callback',
+passport.authenticate('twitter', {
+    successRedirect : '/#/profile',
+    failureRedirect : '/'
 }));
 
 // Export the router for usage in our server/router/index.js
