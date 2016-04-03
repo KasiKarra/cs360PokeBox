@@ -1,5 +1,5 @@
 /**
- * This handles the signing up of users
+ * This handles the logging in of users
  */
 var express = require('express');
 var router = express.Router();
