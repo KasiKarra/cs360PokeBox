@@ -34,7 +34,6 @@ angular.module('clientApp')
 			// Make the request to the server
 			var request = $http.post('/signup', user);
 
-			// we'll come back to here and fill in more when ready
 			request.success(function (data) {
 				// to be filled in on success
 				console.log(data);

@@ -15,11 +15,15 @@ router.post('/', function(req, res, next) {
       res.status(401).json({
           'message': req.flash('signupMessage')
       });  
-    } else {
+    }
+    req.logIn(user, function(err) {
+      if (err) { 
+        return next(err); 
+      }
       res.status(201).json({
           'message': 'Successfully created new user'
       });
-    }
+    });
   })(req, res, next); 
 });
 
