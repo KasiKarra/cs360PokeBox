@@ -26,7 +26,7 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 // Open the connection
 db.once('open', function callback () {
-  console.log('Databsae Connection Successfully Opened at ' + database);
+  console.log('Database Connection Successfully Opened at ' + database);
 });
 
 exports.users = UserModel;
