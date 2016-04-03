@@ -14,5 +14,13 @@ passport.authenticate('facebook', {
     failureRedirect : '/'
 }));
 
+router.get('/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+router.get('/google/callback',
+passport.authenticate('google', {
+        successRedirect : '/#/profile',
+        failureRedirect : '/'
+}));
+
 // Export the router for usage in our server/router/index.js
 module.exports = router;

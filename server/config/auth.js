@@ -10,13 +10,13 @@ module.exports = {
     'twitterAuth' : {
         'consumerKey'       : 'your-consumer-key-here',
         'consumerSecret'    : 'your-client-secret-here',
-        'callbackURL'       : 'http://localhost:8080/auth/twitter/callback'
+        'callbackURL'       : 'http://localhost:3000/auth/twitter/callback'
     },
 
     'googleAuth' : {
-        'clientID'      : 'your-secret-clientID-here',
-        'clientSecret'  : 'your-client-secret-here',
-        'callbackURL'   : 'http://localhost:8080/auth/google/callback'
+        'clientID'      : '751085559976-r4om04tjgicjd7d7ojvucfj1ofrl795s.apps.googleusercontent.com',
+        'clientSecret'  : 't14U5SuRqQsOHoVXaVXELI_i',
+        'callbackURL'   : 'http://localhost:3000/auth/google/callback'
     }
 
 };
