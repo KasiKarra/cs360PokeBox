@@ -7,47 +7,43 @@ var Schema = mongoose.Schema;
 
 // Define the User Schema
 var userSchema = new Schema({
-    firstname: { type: String, required: true },
-    lastname: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    profile: {} // for extra information you may / may not want
+
+    firstname: { type : String },
+    lastname:  { type : String },
+
+    local            : {
+        email        : String,
+        password     : String,
+    },
+    facebook         : {
+        id           : String,
+        token        : String,
+        email        : String,
+        name         : String
+    },
+    twitter          : {
+        id           : String,
+        token        : String,
+        displayName  : String,
+        username     : String
+    },
+    google           : {
+        id           : String,
+        token        : String,
+        email        : String,
+        name         : String
+    },
+
+    profile          : {} // For extra information
 });
 
-// A method that's called every time a user document is saved
-userSchema.pre('save', function (next) {
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
 
-    var user = this;
-
-    // If the password hasn't been modified, move along
-    if (!user.isModified('password')) {
-        return next();
-    }
-
-    // generate salt
-    bcrypt.genSalt(10, function(err, salt){
-
-        if (err) {
-            return next(err);
-        }
-
-        // create the hash and store it
-        bcrypt.hash(user.password, salt, function(err, hash){
-            if (err) {
-                return next(err);
-            }
-            user.password = hash;
-            next();
-        });
-    });
-});
-
-// Password verification helper
-userSchema.methods.comparePassword = function (triedPassword, cb) {
-    bcrypt.compare(triedPassword, this.password, function(err, isMatch) {
-        if(err) return cb(err);
-        cb(null, isMatch);
-    });
+// Check if password is valid
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
 };
 
 // The primary user model

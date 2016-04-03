@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// require('./config/passport')(passport);
+require('./config/passport')(passport);
 app.use(session({ secret: 'gottacatchemall', resave: false, saveUninitialized: false })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions

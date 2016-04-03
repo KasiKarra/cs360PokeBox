@@ -13,8 +13,6 @@ angular.module('clientApp')
 			
 			// Make sure all fields are filled out...
 			if (
-				!user.firstname ||
-				!user.lastname ||
 				!user.email ||
 				!user.password1 ||
 				!user.password2
@@ -28,6 +26,7 @@ angular.module('clientApp')
 				signup.error = 'Your passwords must match.';
 				return false;
 			}
+			user.password = user.password1;
 
 			// Just so we can confirm that the bindings are working
 			console.log(user);
@@ -39,12 +38,16 @@ angular.module('clientApp')
 			request.success(function (data) {
 				// to be filled in on success
 				console.log(data);
+				signup.error = false;
 				signup.success = data.message;
 			});
 
 			request.error(function (data) {
 				// to be filled in on error
 				console.log(data);
+				if(Array.isArray(data.message)) {
+					data.message = data.message.join();
+				}
 				signup.error = data.message;
 			});
 		};
