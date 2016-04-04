@@ -9,12 +9,15 @@ var developmentDb = 'mongodb://localhost/test';
 var productionDb = 'urlToProductionMongoDb';
 var database;
 
-if (process.env.NODE_ENV === 'development') {
+var environment = process.env.NODE_ENV || 'development';
+
+if (environment === 'development') {
     database = developmentDb;
     mongoose.connect(database);
+    mongoose.set('debug', true);
 }
 
-if (process.env.NODE_ENV === 'production') {
+if (environment === 'production') {
     database = productionDb;
     mongoose.connect(database);
 }
