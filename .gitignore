@@ -48,3 +48,7 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+server/node_modules/.bin/semver
+server/node_modules/.bin/mime
+server/node_modules/.bin/mime.cmd
+server/node_modules/.bin/semver.cmd
