@@ -43,10 +43,10 @@ angular.module('clientApp')
     }, minute);
 
 	var init = function () {
-        if($cookieStore.get('version')==1) {
+        if($cookieStore.get('version') === 1) {
             game.data = $cookieStore.get('data');
         }
-    }
+    };
 
     init();
 
