@@ -46,6 +46,11 @@ angular
         controller: 'LoginCtrl',
         controllerAs: 'login'
       })
+      .when('/game', {
+        templateUrl: 'views/game.html',
+        controller: 'GameCtrl',
+        controllerAs: 'game'
+      })
       .otherwise({
         redirectTo: '/'
       });
