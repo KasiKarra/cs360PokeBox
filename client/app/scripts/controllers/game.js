@@ -27,8 +27,9 @@ angular.module('clientApp')
     /************************************
      * Timing Loop
      ***********************************/
-    var delay = 500; // Half a second
+    var delay = 1000; // One second timer
     var timer = $interval(function() {
+      console.log(game.data.points);
     	game.data.points += parseFloat(game.pointRate());
     }, delay);
 
