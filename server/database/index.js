@@ -3,6 +3,7 @@
  */
 var mongoose = require('mongoose');
 var UserModel = require('./schemas/user');
+var ItemModel = require('./schemas/items')
 
 // Connections
 var developmentDb = 'mongodb://localhost/test';
@@ -33,3 +34,4 @@ db.once('open', function callback () {
 });
 
 exports.users = UserModel;
+exports.items = ItemModel;
