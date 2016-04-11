@@ -5,11 +5,17 @@
 		<button ng-click="game.start('grass')"    ng-show="game.newGame" class="btn btn-default">Grass</button>
 		<button ng-click="game.start('electric')" ng-show="game.newGame" class="btn btn-default">Do Not Click</button>
 
-		<button ng-show="game.data.fire" class="btn btn-default mb-fire">Fire: {{game.data.fire.total | number:0}}</button>
-		<button ng-show="game.data.water" class="btn btn-default mb-water">Water: {{game.data.water.total | number:0}}</button>
-		<button ng-show="game.data.grass" class="btn btn-default mb-grass">Grass: {{game.data.grass.total | number:0}}</button>
-		<button ng-show="game.data.electric" class="btn btn-default mb-electric">Electric: {{game.data.electric.total | number:0}}</button>
-		<button ng-show="game.data.normal" class="btn btn-default mb-normal">Normal: {{game.data.normal.total | number:0}}</button>
+		<button ng-show="game.data.fire" class="btn btn-default mb-fire disabled">Fire: {{game.data.fire.total | number:0}}</button>
+		<button ng-show="game.data.water" class="btn btn-default mb-water disabled">Water: {{game.data.water.total | number:0}}</button>
+		<button ng-show="game.data.grass" class="btn btn-default mb-grass disabled">Grass: {{game.data.grass.total | number:0}}</button>
+		<button ng-show="game.data.electric" class="btn btn-default mb-electric disabled">Electric: {{game.data.electric.total | number:0}}</button>
+		<button ng-show="game.data.normal" class="btn btn-default mb-normal disabled">Normal: {{game.data.normal.total | number:0}}</button>
+	</div>
+</div>
+
+<div ng-show="game.data.canExplore" class="panel panel-default">
+	<div class="panel-body">
+		<button ng-click="game.ventureForth()" class="btn btn-default">Venture Forth</button>
 	</div>
 </div>
 

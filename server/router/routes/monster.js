@@ -27,12 +27,12 @@ router.get('/getRandom', function (req, res) {
 		monsterFilter = {};
 	}
 
-	Monster.findRandom(monsterFilter, {}, {}, function(err, monster) {
+	Monster.findRandom(monsterFilter, {}, {}, function(err, monsters) {
 		if(err) {
 			return done(err);
 		}
 
-		res.json(monster);
+		res.json(monsters[0]);
 	});
 });
 

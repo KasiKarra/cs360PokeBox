@@ -9,6 +9,8 @@
  */
 angular.module('clientApp')
   .controller('GameCtrl', function ($scope, $http, $interval, $cookieStore) {
+    var EXPLORE = 3;
+
     var game     = this;
     game.data    = {};
     game.newGame = true;
@@ -18,6 +20,29 @@ angular.module('clientApp')
      ***********************************/ 
     game.pointRate = function(element) {
     	return (game.data[element].constant * game.data[element].multiplier).toFixed(2);
+    };
+
+    game.pointTotal = function() {
+      var totalPoints = 0;
+      for(var element in game.data) {
+        if(game.data[element].hasOwnProperty('total')) {
+          totalPoints += game.data[element].total;
+        }
+      }
+      return totalPoints;
+    };
+
+    game.ventureForth = function() {
+      var request = $http.get('/monster/getRandom/');
+      request.success(function (monster) {
+        if(!game.data.hasOwnProperty(monster.type)) {
+          game.data[monster.type] = {total: 0, constant: 0, multiplier: 0};
+        }
+        game.data[monster.type].constant   += monster.basePower;
+        game.data[monster.type].multiplier += monster.powerMultiplier;
+
+        game.data.party.push(monster);
+      });
     };
 
     /************************************
@@ -47,8 +72,15 @@ angular.module('clientApp')
     var delay = 1000; // One second timer
     var timer = $interval(function() {
     	for(var element in game.data) {
-    		game.data[element].total += parseFloat(game.pointRate(element));
+        if(game.data[element].hasOwnProperty('total')) {
+          game.data[element].total += parseFloat(game.pointRate(element));
+        }
     	}
+
+      if(game.pointTotal() > EXPLORE) {
+        game.data.canExplore = true;
+      }
+
     }, delay);
     
     /************************************
