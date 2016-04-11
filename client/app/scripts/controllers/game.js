@@ -8,7 +8,7 @@
  * Controller of the clientApp
  */
 angular.module('clientApp')
-  .controller('GameCtrl', function ($scope, $interval, $cookieStore) {
+  .controller('GameCtrl', function ($scope, $http, $interval, $cookieStore) {
     var game     = this;
     game.data    = {};
     game.newGame = true;
@@ -25,12 +25,20 @@ angular.module('clientApp')
      ***********************************/
     game.start = function(element) {
     	game.newGame = false;
-    	
-    	game.data[element] = {};
 
-    	game.data[element].total      = 0;
-    	game.data[element].constant   = 1;
-    	game.data[element].multiplier = 0.25;
+      var request = $http.get('/monster/getStarter/' + element);
+
+      // we'll come back to here and fill in more when ready
+      request.success(function (monster) {
+        game.data[element] = {};
+
+        game.data[element].total      = 0;
+        game.data[element].constant   = monster.basePower;
+        game.data[element].multiplier = monster.powerMultiplier;
+
+        game.data.party = [monster];
+
+      });
     };
 
     /************************************
@@ -66,14 +74,14 @@ angular.module('clientApp')
     /************************************
      * Side Navbar
      ***********************************/
-     $(document).ready(function () {
-        $('[data-toggle=offcanvas]').click(function () {
-          if ($('.sidebar-offcanvas').css('background-color') == 'rgb(255, 255, 255)') {
-            $('.list-group-item').attr('tabindex', '-1');
+     angular.element(document).ready(function () {
+        angular.element('[data-toggle=offcanvas]').click(function () {
+          if (angular.element('.sidebar-offcanvas').css('background-color') === 'rgb(255, 255, 255)') {
+            angular.element('.list-group-item').attr('tabindex', '-1');
           } else {
-            $('.list-group-item').attr('tabindex', '');
+            angular.element('.list-group-item').attr('tabindex', '');
           }
-          $('.row-offcanvas').toggleClass('active');
+          angular.element('.row-offcanvas').toggleClass('active');
           
         });
       });
