@@ -12,7 +12,7 @@ angular.module('clientApp')
     var game     = this;
     game.data    = {};
     game.newGame = true;
-
+    
     /************************************
      * Game Data
      ***********************************/ 
@@ -42,15 +42,17 @@ angular.module('clientApp')
     		game.data[element].total += parseFloat(game.pointRate(element));
     	}
     }, delay);
-
+    
     /************************************
      * Game Saving and Initialization
      ***********************************/
     var minute = 60000; // A minute in milliseconds
     var autoSaveTimer = $interval(function () {
+      if(game.newGame === false) {
     	console.log('Saving game...');
         $cookieStore.put('version', 1);
         $cookieStore.put('data', game.data);
+      }
     }, minute);
 
 	var init = function () {
@@ -61,6 +63,20 @@ angular.module('clientApp')
     };
 
     init();
+    /************************************
+     * Side Navbar
+     ***********************************/
+     $(document).ready(function () {
+        $('[data-toggle=offcanvas]').click(function () {
+          if ($('.sidebar-offcanvas').css('background-color') == 'rgb(255, 255, 255)') {
+            $('.list-group-item').attr('tabindex', '-1');
+          } else {
+            $('.list-group-item').attr('tabindex', '');
+          }
+          $('.row-offcanvas').toggleClass('active');
+          
+        });
+      });
 
     /************************************
      * Controller Cleanup

@@ -4,7 +4,6 @@
 		<button ng-click="game.start('water')"    ng-show="game.newGame" class="btn btn-default">Water</button>
 		<button ng-click="game.start('grass')"    ng-show="game.newGame" class="btn btn-default">Grass</button>
 		<button ng-click="game.start('electric')" ng-show="game.newGame" class="btn btn-default">Do Not Click</button>
-	
 
 		<button ng-show="game.data.fire" class="btn btn-default mb-fire">Fire: {{game.data.fire.total | number:0}}</button>
 		<button ng-show="game.data.water" class="btn btn-default mb-water">Water: {{game.data.water.total | number:0}}</button>
@@ -12,4 +11,21 @@
 		<button ng-show="game.data.electric" class="btn btn-default mb-electric">Electric: {{game.data.electric.total | number:0}}</button>
 		<button ng-show="game.data.normal" class="btn btn-default mb-normal">Normal: {{game.data.normal.total | number:0}}</button>
 	</div>
+</div>
+
+
+
+<div class="container-fluid">
+      <div class="row row-offcanvas row-offcanvas-left">
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+          <div ng-repeat="monster in game.data.party">
+          <img class="party-image" src="{{monster.image}}">{{monster.name}}
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-9 content">
+          <p class="pull-left">
+            <button ng-show="game.data.party" type="button" class="btn btn-primary" id="party-button" data-toggle="offcanvas">Party</button>
+          </p>
+       </div>
 </div>
