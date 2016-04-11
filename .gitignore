@@ -1,5 +1,6 @@
 # Local Data Stores
 data/
+!data/documents/*
 
 # Windows image file caches
 Thumbs.db
