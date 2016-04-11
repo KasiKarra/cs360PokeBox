@@ -9,19 +9,28 @@
  */
 angular.module('clientApp')
   .controller('GameCtrl', function ($scope, $interval, $cookieStore) {
-    var game = this;
-    game.data = {};
+    var game     = this;
+    game.data    = {};
+    game.newGame = true;
 
     /************************************
      * Game Data
+     ***********************************/ 
+    game.pointRate = function(element) {
+    	return (game.data[element].constant * game.data[element].multiplier).toFixed(2);
+    };
+
+    /************************************
+     * New Game
      ***********************************/
-    game.data.points = 0;
+    game.start = function(element) {
+    	game.newGame = false;
+    	
+    	game.data[element] = {};
 
-    game.data.pointMultiplier = 0.25;
-    game.data.pointConstant   = 1;
-
-    game.pointRate = function() {
-    	return (game.data.pointMultiplier * game.data.pointConstant).toFixed(2);
+    	game.data[element].total      = 0;
+    	game.data[element].constant   = 1;
+    	game.data[element].multiplier = 0.25;
     };
 
     /************************************
@@ -29,8 +38,9 @@ angular.module('clientApp')
      ***********************************/
     var delay = 1000; // One second timer
     var timer = $interval(function() {
-      console.log(game.data.points);
-    	game.data.points += parseFloat(game.pointRate());
+    	for(var element in game.data) {
+    		game.data[element].total += parseFloat(game.pointRate(element));
+    	}
     }, delay);
 
     /************************************
@@ -38,7 +48,7 @@ angular.module('clientApp')
      ***********************************/
     var minute = 60000; // A minute in milliseconds
     var autoSaveTimer = $interval(function () {
-    	console.log('Saving game: ' + game.data.points);
+    	console.log('Saving game...');
         $cookieStore.put('version', 1);
         $cookieStore.put('data', game.data);
     }, minute);
@@ -46,6 +56,7 @@ angular.module('clientApp')
 	var init = function () {
         if($cookieStore.get('version') === 1) {
             game.data = $cookieStore.get('data');
+            game.newGame = false;
         }
     };
 
