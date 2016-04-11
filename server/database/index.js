@@ -35,7 +35,7 @@ db.once('open', function callback () {
 
  	 // Initialize database with data if empty
 	var MonsterData = require('../config/data/monsters.json');
-	MonsterModel.count({}, function(err, result) {
+	MonsterModel.count(function(err, result) {
 		if(result === 0) {
 			console.log('Populating database with default monsters...');
 			MonsterModel.insertMany(MonsterData);
