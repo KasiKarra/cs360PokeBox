@@ -1,0 +1,46 @@
+[
+    {
+        "hp": 10,
+        "type": "grass",
+        "name": "Grass",
+        "starter": true,
+        "basePower": 1,
+        "powerMultiplier": 0.25,
+        "image": "/images/GrassStarter.png"
+    },
+    {
+        "hp": 10,
+        "type": "fire",
+        "name": "Fire",
+        "starter": true,
+        "basePower": 1,
+        "powerMultiplier": 0.25,
+        "image": "/images/FireStarter.png"
+    },
+    {
+        "hp": 10,
+        "type": "water",
+        "name": "Water",
+        "starter": true,
+        "basePower": 1,
+        "powerMultiplier": 0.25,
+        "image": "/images/WaterStarter.png"
+    },
+    {
+        "hp": 10,
+        "type": "electric",
+        "name": "Electric Rat",
+        "starter": true,
+        "basePower": 1,
+        "powerMultiplier": 0.25,
+        "image": "/images/ElectricStarter.png"
+    },
+    {
+        "hp": 2,
+        "type": "normal",
+        "name": "Rawr",
+        "basePower": 0.25,
+        "powerMultiplier": 0.1,
+        "image": "/images/Normal_1.png"
+    }
+]
